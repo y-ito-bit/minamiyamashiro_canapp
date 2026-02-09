@@ -64,6 +64,14 @@ export default function Step1() {
                 />
             </div>
 
+            <div className="watercolor-box p-4 text-xs text-gray-600 leading-relaxed space-y-2">
+                <div className="font-bold text-gray-700">MBTIの見方（要約）</div>
+                <div>E / I: 人との交流や行動で活力を得る / 一人で考え内省して活力を得る</div>
+                <div>S / N: 具体的・現実的な情報重視 / 抽象的・可能性重視</div>
+                <div>T / F: 論理・客観で判断 / 価値観・共感で判断</div>
+                <div>J / P: 計画的で結論を好む / 柔軟で自由を好む</div>
+            </div>
+
             <TypeDisplay type={mbtiType} />
 
             <div className="text-center px-6">

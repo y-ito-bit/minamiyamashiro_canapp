@@ -8,6 +8,9 @@ export default function Step3() {
     const { mbtiType, reportData, userName } = useAppStore();
 
     if (!reportData) return <div className="text-center p-10 font-bold text-gray-500 animate-pulse">レポートを生成しています...<br />(少し時間がかかります)</div>;
+    const focusArea = Array.isArray(reportData.focusArea) ? reportData.focusArea : [];
+    const identifiedSkills = Array.isArray(reportData.identifiedSkills) ? reportData.identifiedSkills : [];
+    const message = typeof reportData.message === 'string' ? reportData.message : '';
 
     return (
         <motion.div
@@ -20,9 +23,9 @@ export default function Step3() {
                     {userName ? `${userName}さんのお仕事ポートフォリオ` : 'あなたのお仕事ポートフォリオ'}
                 </h1>
                 <p className="text-gray-500">対話から見えた「現場の強み」です</p>
-                {reportData.focusArea && (
+                {focusArea.length > 0 && (
                     <div className="flex justify-center gap-2 mt-2">
-                        {reportData.focusArea.map((area: string, i: number) => (
+                        {focusArea.map((area: string, i: number) => (
                             <span key={i} className="px-3 py-1 bg-gradient-to-r from-yellow-100 to-yellow-200 text-yellow-800 rounded-full text-xs font-bold shadow-sm">
                                 {area}
                             </span>
@@ -40,7 +43,7 @@ export default function Step3() {
                             強みからのメッセージ
                         </h3>
                         <p className="text-gray-600 leading-relaxed whitespace-pre-wrap font-medium">
-                            {reportData.message}
+                            {message}
                         </p>
                     </div>
 
@@ -49,7 +52,7 @@ export default function Step3() {
                             見つかった専門性と強み
                         </h3>
                         <div className="space-y-4">
-                            {reportData.identifiedSkills.map((skill: any, i: number) => (
+                            {identifiedSkills.map((skill: any, i: number) => (
                                 <div key={i} className="bg-white/60 p-4 rounded-xl border border-white shadow-sm">
                                     <div className="flex items-center gap-2 mb-2">
                                         <span className={`text-[10px] font-bold px-2 py-0.5 rounded text-white ${skill.type === '実務' ? 'bg-purple-400' : 'bg-green-400'}`}>

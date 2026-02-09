@@ -99,6 +99,13 @@ export default function Step2() {
     const strengthsPortion = Math.min(Math.max(understanding.strengthsCount, 0), 3) / 3;
     const progressPercent = Math.round(basePercent + (episodePortion * 40) + (strengthsPortion * 30));
 
+    const isReportShape = (data: any) => {
+        if (!data || typeof data !== 'object') return false;
+        if (!data.strengthMap || typeof data.strengthMap !== 'object') return false;
+        if (!Array.isArray(data.identifiedSkills)) return false;
+        return true;
+    };
+
     return (
         <motion.div
             initial={{ opacity: 0 }}
@@ -190,9 +197,11 @@ export default function Step2() {
                                     throw new Error(data.error || "Failed to generate report");
                                 }
 
-                                if (data) {
+                                if (data && isReportShape(data)) {
                                     useAppStore.getState().setReportData(data);
                                     nextStep();
+                                } else {
+                                    throw new Error('Invalid report data');
                                 }
                             } catch (e) {
                                 console.error("Failed to generate report", e);
