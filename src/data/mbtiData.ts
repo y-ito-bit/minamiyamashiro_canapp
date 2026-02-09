@@ -1,0 +1,18 @@
+export const MBTI_TYPES: Record<string, { title: string; description: string }> = {
+    ISTJ: { title: "管理者タイプ", description: "事実に基づき、信頼を持って行動する実務家。" },
+    ISFJ: { title: "擁護者タイプ", description: "周囲を温かく守り、献身的に支える人。" },
+    INFJ: { title: "提唱者タイプ", description: "静かなる理想主義者、人々を導く光。" },
+    INTJ: { title: "建築家タイプ", description: "想像力豊かで、戦略的に物事を進める計画者。" },
+    ISTP: { title: "巨匠タイプ", description: "大胆で実践的、道具を使いこなす名手。" },
+    ISFP: { title: "冒険家タイプ", description: "柔軟で魅力的、新しいことを楽しむ芸術家。" },
+    INFP: { title: "仲介者タイプ", description: "詩的で親切、利他主義の情熱家。" },
+    INTP: { title: "論理学者タイプ", description: "貪欲な知識欲を持つ、革新的な発明家。" },
+    ESTP: { title: "起業家タイプ", description: "賢くてエネルギッシュ、危険を楽しむ冒険者。" },
+    ESFP: { title: "エンターテイナータイプ", description: "自発的で精力的、周りを退屈させない人。" },
+    ENFP: { title: "運動家タイプ", description: "情熱的で独創的、自由な精神の持ち主。" },
+    ENTP: { title: "討論者タイプ", description: "賢くて好奇心旺盛、知的挑戦を楽しむ思想家。" },
+    ESTJ: { title: "幹部タイプ", description: "優秀な管理者、物事を整理し人をまとめる。" },
+    ESFJ: { title: "領事官タイプ", description: "非常に思いやりがあり、人気のある社交家。" },
+    ENFJ: { title: "主人公タイプ", description: "カリスマ性があり、人々を励ますリーダー。" },
+    ENTJ: { title: "指揮官タイプ", description: "大胆で想像力豊か、道を見つけるリーダー。" },
+};

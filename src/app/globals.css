@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-primary: #25C49F;
+  --color-accent: #FFD700;
+  --color-paper: #F0F4F3;
+  --font-zen: var(--font-zen-maru);
+
+  --animate-float: float 6s ease-in-out infinite;
+
+  @keyframes float {
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+}
+
+:root {
+  --background: #F0F4F3;
+  --foreground: #4a5568;
+  /* Soft dark gray for text */
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-zen), sans-serif;
+  overflow-x: hidden;
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.5' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+}
+
+@utility watercolor-box {
+  @apply bg-white/60 backdrop-blur-sm rounded-2xl shadow-lg border border-white/50;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03), inset 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+@utility float-soft {
+  animation: float 6s ease-in-out infinite;
+}
+
+@utility btn-primary {
+  @apply bg-primary text-white font-bold py-3 px-8 rounded-full shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0;
+}
+
+@utility watercolor-input {
+  @apply w-full bg-white/70 border border-white/60 rounded-xl px-4 py-3 text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/60;
+}
