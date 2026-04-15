@@ -2,6 +2,9 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 import { NextRequest, NextResponse } from 'next/server';
 import { MINAMI_YAMASHIRO_CONTEXT } from '@/data/organizationData';
 
+export const maxDuration = 60; // タイムアウトを60秒に延長 (Vercel Hobbyの最大値)
+export const dynamic = 'force-dynamic';
+
 export async function POST(req: NextRequest) {
     const apiKey = process.env.GEMINI_API_KEY;
     if (!apiKey) {

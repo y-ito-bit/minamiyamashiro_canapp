@@ -2,6 +2,9 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 import { NextRequest, NextResponse } from 'next/server';
 import { MINAMI_YAMASHIRO_CONTEXT } from '@/data/organizationData';
 
+export const maxDuration = 60; // タイムアウトを60秒に延長 (Vercel Hobbyの最大値)
+export const dynamic = 'force-dynamic';
+
 export async function POST(req: NextRequest) {
     const apiKey = process.env.GEMINI_API_KEY;
     if (!apiKey) {
@@ -122,13 +125,19 @@ ${MINAMI_YAMASHIRO_CONTEXT}
         const encoder = new TextEncoder();
         const readable = new ReadableStream({
             async start(controller) {
-                for await (const chunk of result.stream) {
-                    const chunkText = chunk.text();
-                    if (chunkText) {
-                        controller.enqueue(encoder.encode(chunkText));
+                try {
+                    for await (const chunk of result.stream) {
+                        const chunkText = chunk.text();
+                        if (chunkText) {
+                            controller.enqueue(encoder.encode(chunkText));
+                        }
                     }
+                } catch (streamError) {
+                    console.error('Stream processing error:', streamError);
+                    // エラーメッセージをクライアントに返して終了させることも可能です
+                } finally {
+                    controller.close();
                 }
-                controller.close();
             },
         });
 
