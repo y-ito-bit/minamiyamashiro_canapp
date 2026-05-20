@@ -148,8 +148,7 @@ export function useChat() {
             const reader = response.body.getReader();
             const decoder = new TextDecoder();
             let assistantMessage = '';
-
-            setMessages([{ role: 'assistant', content: '' }]);
+            let isFirstChunk = true;
 
             while (true) {
                 const { done, value } = await reader.read();
@@ -157,11 +156,16 @@ export function useChat() {
                 const text = decoder.decode(value, { stream: true });
                 assistantMessage += text;
 
-                setMessages((prev) => {
-                    const updated = [...prev];
-                    updated[0] = { role: 'assistant', content: assistantMessage };
-                    return updated;
-                });
+                if (isFirstChunk) {
+                    setMessages([{ role: 'assistant', content: assistantMessage }]);
+                    isFirstChunk = false;
+                } else {
+                    setMessages((prev) => {
+                        const updated = [...prev];
+                        updated[0] = { role: 'assistant', content: assistantMessage };
+                        return updated;
+                    });
+                }
             }
         } catch (error) {
             console.error('Error fetching greeting:', error);

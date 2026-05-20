@@ -7,6 +7,7 @@ import CoachPersona from './CoachPersona';
 import { useRef, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useAppStore } from '@/store/useAppStore';
+import { Bot } from 'lucide-react';
 
 type UnderstandingState = {
     officeHistory: boolean;
@@ -151,6 +152,31 @@ export default function Step2() {
                         onSelect={sendMessage}
                     />
                 ))}
+                {messages.length === 0 && isLoading && (
+                    <motion.div
+                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        transition={{ duration: 0.4, ease: "easeOut" }}
+                        className="flex flex-col w-full mb-6 items-start"
+                    >
+                        <div className="flex w-full justify-start">
+                            <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center mr-3 mt-1 flex-shrink-0 animate-pulse">
+                                <Bot size={20} className="text-primary" />
+                            </div>
+
+                            <div
+                                className="max-w-[80%] p-5 rounded-2xl shadow-sm text-base leading-relaxed bg-white/80 backdrop-blur-sm border border-white/60 text-gray-700 rounded-bl-none animate-pulse flex items-center space-x-3"
+                            >
+                                <span className="text-gray-500 font-medium">あなたと会話する準備を始めています</span>
+                                <span className="flex space-x-1 items-center">
+                                    <span className="w-1.5 h-1.5 bg-primary rounded-full animate-bounce"></span>
+                                    <span className="w-1.5 h-1.5 bg-primary rounded-full animate-bounce delay-75"></span>
+                                    <span className="w-1.5 h-1.5 bg-primary rounded-full animate-bounce delay-150"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </motion.div>
+                )}
                 {isLoading && messages[messages.length - 1]?.role === 'user' && (
                     <div className="flex justify-start mb-4 ml-2">
                         <div className="flex space-x-1">
